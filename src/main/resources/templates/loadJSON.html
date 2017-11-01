@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>LoadJSON</title>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+<body class="body" style="background-color: #f6f6f6">
+	<div class="container">
+		<form method="POST" th:action="@{/upload}" enctype="multipart/form-data">
+			<input type="file" name="file" /><br/><br/>
+			<input type="submit" value="Load JSON"
+				class="btn btn-success btn-sm" />
+		</form>
+	</div>
+
+</body>
+
+</html>
