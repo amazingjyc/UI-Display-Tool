@@ -28,7 +28,7 @@ import java.io.FileWriter;
 public class Controller {
 
 	// Save the uploaded file to this folder
-	private static String UPLOADED_FOLDER = "C:\\Users\\jarre\\eclipse-workspace\\UI Display Tool\\uploaded\\";
+	private static String UPLOADED_FOLDER = "C:\\Users\\Specter94\\Desktop\\UI-Display-Tool-master\\uploaded\\";
 
 	@RequestMapping(value = { "/loadJSON" }, method = RequestMethod.GET)
 	public ModelAndView loadJSON() {
@@ -112,7 +112,7 @@ public class Controller {
 	public static void loadUI(JSONObject labelsList, JSONObject buttonsList, JSONObject textFieldsList) {
 
 		File file = new File(
-				"C:\\Users\\jarre\\eclipse-workspace\\UI Display Tool\\src\\main\\resources\\templates\\renderedUI.html");
+				"C:\\Users\\Specter94\\Desktop\\UI-Display-Tool-master\\src\\main\\resources\\templates\\renderedUI.html");
 		String htmlPage = "<!DOCTYPE html>\r\n" + "<html xmlns=\"http://www.w3.org/1999/xhtml\"\r\n"
 				+ "	xmlns:th=\"http://www.thymeleaf.org\">\r\n" + "\r\n" + "<head>\r\n"
 				+ "<title>renderedUI</title>\r\n" + "<link rel=\"stylesheet\"\r\n"
@@ -145,9 +145,18 @@ public class Controller {
 			for (int i = 0; i < lList.size(); i++) {
 				JSONObject obj = (JSONObject) lList.get(i);
 				System.out.println(obj);
+
+				String positionX = obj.get("PositionX").toString();
+				String width = obj.get("Width").toString();
+
+				float adjustedWidth = Float.parseFloat(width) + 15;
+				float adjustedX = Float.parseFloat(positionX) - 15;
+				System.out.println(adjustedWidth);
+				System.out.println(adjustedX);
+
 				try {
-					bufferedWriter.append("<label style=\"position:absolute;" + "left:" + obj.get("PositionX") + "px;"
-							+ "top:" + obj.get("PositionY") + "px;" + "width:" + obj.get("Width") + "px;" + "height:"
+					bufferedWriter.append("<label style=\"position:absolute;" + "left:" + adjustedX + "px;"
+							+ "top:" + obj.get("PositionY") + "px;" + "width:" + adjustedWidth + "px;" + "height:"
 							+ obj.get("Height") + "px;" + "display:inline-block;\">" + obj.get("Text") + "</label>");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -162,10 +171,16 @@ public class Controller {
 			for (int i = 0; i < bList.size(); i++) {
 				JSONObject obj = (JSONObject) bList.get(i);
 				System.out.println(obj);
+
+				String width = obj.get("Width").toString();
+
+				float adjustedWidth = Float.parseFloat(width) + 15;
+				System.out.println(adjustedWidth);
+
 				try {
 					bufferedWriter.append("<button type=\"button\" style=\"position:absolute;" + "left:"
 							+ obj.get("PositionX") + "px;" + "top:" + obj.get("PositionY") + "px;" + "width:"
-							+ obj.get("Width") + "px;" + "height:" + obj.get("Height") + "px;"
+							+ adjustedWidth + "px;" + "height:" + obj.get("Height") + "px;"
 							+ "display:inline-block;\">" + obj.get("Text") + "</button>");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
